@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#10100f" />
+  <title>STRINGIFY — String Art Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">S</span> STRINGIFY<span class="brand-dot">.</span></a>
+    <nav><a href="#studio">Studio</a><a href="#how">How it works</a><a href="#instructions">Instructions</a></nav>
+    <span class="top-note">THREAD ART WORKSHOP <i></i></span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> YOUR PHOTO, REIMAGINED</p>
+        <h1>Make memories<br>by <em>hand.</em></h1>
+        <p class="hero-sub">Turn a favourite portrait into a thread-art design — then get the numbered nail-to-nail path to make it in real life.</p>
+        <a class="primary-link" href="#studio">Create your portrait <b>↘</b></a>
+        <div class="hero-foot"><span>01 / UPLOAD</span><span>02 / GENERATE</span><span>03 / MAKE IT REAL</span></div>
+      </div>
+      <div class="hero-art">
+        <div class="art-orbit"></div>
+        <div class="hero-portrait"><img src="assets/hero-string-art.svg" alt="Decorative thread art portrait illustration"></div>
+        <div class="art-caption"><span>FIG. 001</span><span>LINES BECOME A LIKENESS</span></div>
+      </div>
+    </section>
+
+    <section class="studio section" id="studio">
+      <div class="section-heading">
+        <div><p class="eyebrow">THE CREATIVE WORKSPACE</p><h2>Build your <em>portrait.</em></h2></div>
+        <p>Everything runs in your browser. Your photo stays on your device.</p>
+      </div>
+
+      <div class="workbench">
+        <aside class="controls">
+          <div class="step-label"><span>01</span> SOURCE IMAGE</div>
+          <label class="upload-box" for="photoInput">
+            <span class="upload-icon">＋</span><strong>Choose a portrait</strong>
+            <small>JPG, PNG or WEBP · clear face works best</small>
+            <input id="photoInput" type="file" accept="image/*">
+          </label>
+          <div class="control-group">
+            <label for="shapeSelect">Board shape</label>
+            <select id="shapeSelect"><option value="circle">Circular board</option><option value="square">Square board</option></select>
+          </div>
+          <div class="control-group">
+            <label for="nailsRange">Number of nails <output id="nailsValue">180</output></label>
+            <input id="nailsRange" type="range" min="100" max="300" step="10" value="180">
+            <div class="range-hints"><span>100 · simpler</span><span>300 · detailed</span></div>
+          </div>
+          <div class="control-group">
+            <label for="linesRange">Thread connections <output id="linesValue">2,400</output></label>
+            <input id="linesRange" type="range" min="500" max="5000" step="100" value="2400">
+            <div class="range-hints"><span>500</span><span>5,000</span></div>
+          </div>
+          <div class="control-group">
+            <label for="colorSelect">Thread colour</label>
+            <select id="colorSelect"><option value="#f3eee4">Ivory on charcoal</option><option value="#ffffff">White on black</option><option value="#e7a2a2">Rose on charcoal</option><option value="#e8bd67">Gold on navy</option><option value="#9dc5b2">Sage on dark green</option></select>
+          </div>
+          <button class="generate-btn" id="generateBtn" disabled><span>✳</span> Generate string art <b>↗</b></button>
+          <p class="privacy-note">▣ &nbsp;Private by design — image processing happens locally.</p>
+        </aside>
+
+        <div class="preview-panel">
+          <div class="preview-top"><div><span class="live-dot"></span> LIVE CANVAS</div><span id="previewStatus">WAITING FOR IMAGE</span></div>
+          <div class="canvas-wrap" id="canvasWrap">
+            <div class="empty-state" id="emptyState"><div class="empty-symbol">◎</div><strong>Your artwork starts here</strong><span>Upload a photo to begin creating.</span></div>
+            <canvas id="artCanvas" width="900" height="900" aria-label="Generated string art preview"></canvas>
+          </div>
+          <div class="preview-bottom"><span id="canvasMeta">NO SOURCE IMAGE</span><span>STRINGIFY STUDIO / V1</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results section" id="instructions">
+      <div class="section-heading">
+        <div><p class="eyebrow">FROM SCREEN TO STRING</p><h2>Make it <em>by hand.</em></h2></div>
+        <p>Once generated, use the nail sequence below to recreate the artwork on a real board.</p>
+      </div>
+      <div class="result-grid">
+        <div class="result-card">
+          <div class="result-card-head"><span>02 / BUILD SPEC</span><span class="pill" id="resultState">NOT GENERATED</span></div>
+          <div class="spec-grid">
+            <div><small>NAILS</small><strong id="specNails">—</strong></div>
+            <div><small>THREAD LINES</small><strong id="specLines">—</strong></div>
+            <div><small>BOARD</small><strong id="specBoard">—</strong></div>
+            <div><small>EST. THREAD</small><strong id="specLength">—</strong></div>
+          </div>
+          <div class="materials"><strong>Materials checklist</strong><p>◯ Smooth board &nbsp; ◯ Small nails &nbsp; ◯ Hammer</p><p>◯ Embroidery / crochet thread &nbsp; ◯ Tape &nbsp; ◯ Printed guide</p></div>
+          <button class="outline-btn" id="downloadBtn" disabled>Download pattern data <span>↓</span></button>
+          <button class="outline-btn subtle" id="printBtn" disabled>Print nail guide <span>↗</span></button>
+        </div>
+        <div class="result-card path-card">
+          <div class="result-card-head"><span>03 / THREAD ROUTE</span><span class="pill">NUMBERED SEQUENCE</span></div>
+          <p class="path-intro">Each instruction connects one nail to the next. Start at nail 1 and follow the list in order.</p>
+          <div class="path-table-wrap">
+            <table><thead><tr><th>STEP</th><th>FROM NAIL</th><th>TO NAIL</th><th>THREAD</th></tr></thead><tbody id="pathBody"><tr><td colspan="4" class="no-data">Generate a portrait to see your thread path.</td></tr></tbody></table>
+          </div>
+          <div class="path-footer"><span id="pathCount">0 CONNECTIONS</span><span>SEQUENCE IS CLOSED-LOOP</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how section" id="how">
+      <p class="eyebrow">A SIMPLE PROCESS</p><h2>From pixels to <em>possibility.</em></h2>
+      <div class="how-grid">
+        <div><span>01</span><h3>Pick a photo</h3><p>Choose a front-facing portrait with good contrast and a simple background.</p></div>
+        <div><span>02</span><h3>Generate the route</h3><p>The app analyses image brightness and calculates a sequence of thread connections.</p></div>
+        <div><span>03</span><h3>Hammer & weave</h3><p>Place nails around your board, then follow the numbered sequence to weave the portrait.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><a class="brand" href="#"><span class="brand-mark">S</span> STRINGIFY<span class="brand-dot">.</span></a><span>MADE OF LIGHT, LINES & MEMORIES.</span><span>© 2025 STRINGIFY STUDIO</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
