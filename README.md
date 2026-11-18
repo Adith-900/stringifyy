@@ -1,40 +1,21 @@
-# STRINGIFY — AI-style String Art Portrait Studio
+# STRINGIFY Studio V2
 
-A browser-based portrait-to-string-art prototype with a real nail-to-nail route generator.
+A browser-only portrait string-art prototype with crop/zoom/reposition controls, image tuning, a nail-to-nail route generator and downloadable build instructions.
 
-## Run locally
+## Run
+Open `index.html` in a modern browser, or run `python -m http.server 8000` in this folder and visit `http://localhost:8000`.
 
-No build step or package installation is needed.
+## New in V2
+- Upload JPG/PNG/WEBP.
+- Drag to reposition the image inside a circular crop.
+- Zoom from 1× to 3× and reset crop position.
+- Brightness, contrast and detail-strength controls.
+- 180, 240 or 300 nail settings.
+- Multiple route densities and thread colours.
+- PNG artwork export, JSON connection list and printable nail/thread guide.
+- Photo processing is local in the browser.
 
-1. Unzip this folder.
-2. Open `index.html` in a modern browser, or run a local static server:
-   - Python: `python -m http.server 8000`
-   - Then visit `http://localhost:8000`
-3. Upload a portrait and click **Generate string art**.
+## Important algorithm note
+This is a computational greedy line-art prototype, not a hosted generative-AI model. The line optimizer uses grayscale darkness and iteratively reduces darkness along selected chords. String-art quality depends strongly on source photo, crop, lighting and parameter tuning. For best results, use a well-lit, front-facing portrait against a simple background; crop from top of hair to below chin/shoulders; increase contrast moderately. This is a starting route and should be test-woven before committing to a large board.
 
-## Features
-
-- Local image upload (JPG, PNG, WEBP)
-- Circular or square nail layout
-- Adjustable nail count and thread-line count
-- Multiple thread colours
-- Greedy image-to-string-art route optimizer
-- Numbered nail-to-nail instructions
-- Downloadable JSON pattern data
-- Printable nail placement and connection guide
-- Responsive layout; photo processing stays in the browser
-
-## Important technical note
-
-This version uses an image-analysis and greedy line-optimization algorithm to create a string-art rendering and physical thread sequence. It does **not** call a hosted generative-AI image model. The result is a computational string-art approximation, not a guaranteed photorealistic AI conversion. The generated route is a starting pattern: test it on a small board first, because nail spacing, thread thickness, tension, and board dimensions affect the physical result.
-
-## Pattern coordinates
-
-Nail coordinates are normalized to the range 0–1 relative to the 900 × 900 canvas. The default print guide assumes a 40 cm board. Scale the nail guide to the actual board diameter when printing.
-
-## Suggested production upgrades
-
-- Add an image segmentation / face-cropping step for better facial contrast.
-- Add server-side image generation using a selected AI image provider.
-- Add PDF export with a scaled nail map and split connection sheets.
-- Calibrate thread-length estimates for the selected board diameter and nail geometry.
+The printable board guide uses a 36 cm nail circle. Confirm board thickness and nail size before building. The estimated pattern should be validated physically; thread length and tension vary by material.

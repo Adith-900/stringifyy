@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#141413"><title>STRINGIFY — Portrait to Thread Art</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="#"><span class="brand-mark">S</span> STRINGIFY<span class="gold">.</span></a><nav><a href="#studio">Studio</a><a href="#guide">Nail guide</a><a href="#steps">How it works</a></nav><span class="top-note">PORTRAIT STRING ART STUDIO <i></i></span></header>
+<main>
+<section class="hero"><div><p class="eyebrow">TURN A PHOTO INTO A HANDMADE MEMORY</p><h1>Portraits made<br>of <em>thread.</em></h1><p class="hero-sub">Prepare your photo, tune the image, generate a cleaner string-art portrait and follow a numbered nail-to-nail route to make it in real life.</p><a class="primary" href="#studio">Open the studio <b>↘</b></a><div class="hero-foot">UPLOAD · CROP · GENERATE · WEAVE</div></div>
+<div class="hero-visual"><img src="assets/hero.svg" alt="Abstract circular thread art portrait"><span>FIG. 001 / THREAD STUDY</span></div></section>
+
+<section class="studio section" id="studio">
+<div class="section-heading"><div><p class="eyebrow">01 / PHOTO PREPARATION</p><h2>Set up your <em>portrait.</em></h2></div><p>Crop and position your photo before the thread algorithm reads its light and dark areas.</p></div>
+<div class="studio-grid">
+<aside class="panel controls">
+<div class="control-title">SOURCE PHOTO</div>
+<label class="upload" for="photoInput"><span>＋</span><b>Upload a portrait</b><small>JPG · PNG · WEBP</small><input id="photoInput" type="file" accept="image/*"></label>
+<div class="cropper">
+<div class="control-title">CROP & POSITION</div>
+<div class="crop-stage" id="cropStage"><canvas id="cropCanvas" width="360" height="360"></canvas><div class="crop-help">Drag photo to reposition</div></div>
+<label class="range-label" for="zoomRange">Zoom <output id="zoomVal">1.00×</output></label><input id="zoomRange" type="range" min="1" max="3" step=".01" value="1">
+<button class="small-btn" id="centerBtn" type="button">Reset crop position</button>
+</div>
+<div class="control-title spaced">IMAGE TUNING</div>
+<label class="range-label" for="brightness">Brightness <output id="brightnessVal">0</output></label><input id="brightness" type="range" min="-50" max="50" value="0">
+<label class="range-label" for="contrast">Contrast <output id="contrastVal">20</output></label><input id="contrast" type="range" min="-40" max="80" value="20">
+<label class="range-label" for="detail">Detail strength <output id="detailVal">65%</output></label><input id="detail" type="range" min="20" max="100" value="65">
+<div class="control-title spaced">STRING ART SETTINGS</div>
+<label class="field-label" for="nails">Nail count</label><select id="nails"><option>180</option><option selected>240</option><option>300</option></select>
+<label class="field-label" for="lineCount">Thread connections</label><select id="lineCount"><option value="1600">1,600 · softer</option><option value="2400" selected>2,400 · balanced</option><option value="3200">3,200 · detailed</option><option value="4000">4,000 · dense</option></select>
+<label class="field-label" for="threadColor">Thread colour</label><select id="threadColor"><option value="#eee7d9">Ivory</option><option value="#ffffff">White</option><option value="#d8b77a">Warm gold</option><option value="#e7a2a2">Rose</option></select>
+<button class="generate" id="generateBtn" disabled>Generate portrait <b>↗</b></button>
+<p class="privacy">Your image is processed locally in this browser. It is not uploaded to a server.</p>
+</aside>
+<div class="panel preview-panel">
+<div class="preview-head"><span><i class="live"></i> ARTWORK PREVIEW</span><span id="status">WAITING FOR PHOTO</span></div>
+<div class="artboard"><div id="empty"><b>◎</b><strong>Your portrait will appear here</strong><small>Upload a photo, adjust the crop, then generate.</small></div><canvas id="result" width="900" height="900"></canvas></div>
+<div class="preview-foot"><span id="meta">NO IMAGE LOADED</span><span>240 NAIL CIRCULAR BOARD</span></div>
+<div class="preview-actions"><button id="savePng" disabled>Save artwork PNG ↓</button><button id="saveJson" disabled>Download thread route ↓</button></div>
+</div>
+</div>
+</section>
+
+<section class="section guide" id="guide"><div class="section-heading"><div><p class="eyebrow">02 / REAL-WORLD BUILD</p><h2>From screen to <em>board.</em></h2></div><p>The route connects numbered nails in sequence. The nail positions are evenly spaced around the circular board.</p></div>
+<div class="guide-grid">
+<div class="panel guide-info"><div class="control-title">BOARD SPECIFICATION</div><div class="specs"><div><small>NAILS</small><b id="specNails">240</b></div><div><small>THREAD LINES</small><b id="specLines">—</b></div><div><small>NAIL CIRCLE</small><b>36 cm</b></div><div><small>BOARD SIZE</small><b>40 × 40 cm</b></div></div><p>Start at nail 1 at the top (12 o’clock), then follow the numbered route. Numbering continues clockwise.</p><button id="printGuide" disabled class="secondary">Print nail + thread guide ↗</button></div>
+<div class="panel route-panel"><div class="control-title">THREAD CONNECTION SEQUENCE</div><div class="route-scroll"><table><thead><tr><th>STEP</th><th>FROM</th><th>TO</th></tr></thead><tbody id="routeRows"><tr><td colspan="3" class="muted">Generate a portrait to show the nail route.</td></tr></tbody></table></div><div class="route-foot"><span id="routeTotal">0 CONNECTIONS</span><span>FOLLOW IN ORDER</span></div></div>
+</div></section>
+<section class="section steps" id="steps"><p class="eyebrow">03 / THE PROCESS</p><h2>Good portraits start with <em>good preparation.</em></h2><div class="steps-grid"><div><b>01</b><h3>Crop the face</h3><p>Move and zoom the image so the full face sits comfortably inside the circular area.</p></div><div><b>02</b><h3>Balance the tones</h3><p>Increase contrast gently. Eyes, hair, eyebrows and lips create the darker details that thread art needs.</p></div><div><b>03</b><h3>Weave the route</h3><p>Generate the pattern, print the guide, then wrap thread from nail to nail in the listed order.</p></div></div></section>
+</main><footer><a class="brand" href="#"><span class="brand-mark">S</span> STRINGIFY<span class="gold">.</span></a><span>LIGHT · LINES · MEMORIES</span><span>STRINGIFY STUDIO / V2</span></footer>
+<script src="app.js"></script>
+</body></html>
